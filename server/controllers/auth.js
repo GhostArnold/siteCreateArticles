@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import token from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 export const register = async (req, res) => {
@@ -38,4 +38,44 @@ export const register = async (req, res) => {
   }
 };
 
-export const autorization = async () => {};
+export const autorization = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.json({
+        message: 'Такого пользователя не существует',
+      });
+    }
+    // Сравниваем введённый пароль с паролем из базы, который зашифрован
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordCorrect) {
+      return res.json({
+        message: 'Введённый пароль неверный',
+      });
+    }
+
+    // Создаём JWT-токен с id пользователя, используя секретный ключ и задавая срок действия токена
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '30d' } // Токен будет действовать 30 дней
+    );
+
+    res.json({
+      token,
+      user,
+      message: 'Вы вошли в систему',
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({
+      message: 'Произошла ошибка при авторизации',
+    });
+  }
+};

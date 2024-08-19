@@ -10,7 +10,7 @@ dotenv.config();
 app.use(cors());
 
 // Извлекаем из env
-const port = process.env.PORT;
+const port = parseInt(process.env.PORT);
 
 // middleware
 app.use(express.json());
