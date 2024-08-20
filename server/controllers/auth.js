@@ -79,3 +79,34 @@ export const autorization = async (req, res) => {
     });
   }
 };
+
+export const getMe = async (req, res) => {
+  try {
+    // Ищем пользователя в базе данных по идентификатору, который пришел в запросе (req.id)
+    const user = await User.findById(req.id);
+
+    if (!user) {
+      return res.json({
+        message: 'Такого пользователя не существует',
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '30d' } // Токен будет действовать 30 дней
+    );
+
+    res.json({
+      user,
+      token,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({
+      message: 'Нет доступа',
+    });
+  }
+};
