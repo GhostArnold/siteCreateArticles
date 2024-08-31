@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import MainPage from './pages/MainPage';
+import MainPage from './pages/MainPage/MainPage';
 import AddPostPage from './pages/AddPostPage';
 import EditPostPage from './pages/EditPostPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 import PostsPage from './pages/PostsPage';
 import PostPage from './pages/PostPage';
 import RegisterPage from './pages/RegisterPage';

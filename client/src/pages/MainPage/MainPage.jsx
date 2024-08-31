@@ -1,8 +1,11 @@
-import rocksFogSeaDusk from '../img/Rocks-fog-sea-dusk_1600x1200.jpg';
+import rocksFogSeaDusk from '../../img/header.jpg';
 import styles from './MainPage.module.scss';
 const MainPage = () => {
   return (
     <div>
+      <header>
+        <img src={rocksFogSeaDusk} alt="" className={styles.headBgc} />
+      </header>
       <h1>Main page</h1>
     </div>
   );
