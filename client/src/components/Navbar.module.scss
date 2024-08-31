@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f7f7f3;
+  flex-wrap: wrap;
+}
+// Аватарка
+.avatar {
+  padding: 10px 20px;
+  background-color: beige;
+  border: 0.5px solid black;
+}
+
+// Навбар
+.navList {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+  }
+  li {
+    padding: 0 10px;
+
+    &:hover {
+      transition: transform 0.3s ease;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+// Кнопка войти
+.logInBtn {
+  padding: 10px 15px;
+  background-color: #39393b;
+  text-decoration: none;
+  color: whitesmoke;
+}
